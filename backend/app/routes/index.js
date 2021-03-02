@@ -5,12 +5,12 @@ exports.routes = function(app) {
     response.header({"Access-Control-Allow-Origin": "*"})
     let query = request.query.query;
     let category = request.query.category;
-    let url = `https://api.chucknorris.io/jokes/`;
+    let url = `https://api.chucknorris.io/jokes/random`;
     if(category != undefined){
-      url += `random?category=${category}`;
+      url = `https://api.chucknorris.io/jokes/random?category=${category}`;
     }
     else if (query != undefined){
-      url += `search?query=${query}`;
+      url = `https://api.chucknorris.io/jokes/search?query=${query}`;
     }
     let newArray = []
     http(url, { json: true }, (err, res, body) => {

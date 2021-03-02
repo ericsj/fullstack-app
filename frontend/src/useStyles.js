@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
     height: '20vh',
     margin: '3vh',
     width: '40vw',
+    display: 'flex',
+    alignItems: 'center',
     [theme.breakpoints.down('sm')]:{
       height: '39.28vh',
       minWidth: '39.28vh',

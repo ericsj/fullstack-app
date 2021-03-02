@@ -3,10 +3,10 @@ import './App.css';
 import 'fontsource-roboto';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
-import ResultsCount from './components/ResultsCount';
+import Typography from '@material-ui/core/Typography';
 import SearchButton from './components/SearchButton';
 import useStyles from './useStyles.js'
-import PaperContainer from './components/PaperContainer';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 
@@ -14,12 +14,11 @@ function App() {
   let startingCategories = ["Any","animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
   const classes = useStyles();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState(startingCategories);
   const [resultsArray, setResultsArray] = useState([]);
-  
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -27,6 +26,18 @@ function App() {
       },
     },
   });
+
+  function PaperContainer(props){
+    return(
+      <Grid item xs={10} md={12}>
+        <Paper className={props.paperClass}>
+          <Typography>
+            {props.text}
+          </Typography>
+        </Paper>
+      </Grid>
+    );
+  }
 
   function PaperGrid() {
     if (resultsArray.length === 1){
@@ -40,13 +51,26 @@ function App() {
     return (
     <div>
         {resultsArray.map(item => (
+          <div>
           <PaperContainer paperClass={classes.Paper} text={item}/>
+          <br/>
+          </div>
         ))}
         {resultsArray.length}
     </div>
     );
     }
     return("");
+  }
+
+  function ResultCount(props) {
+    return(
+      <Grid item xs={10} md={10}>
+      <Typography style={{fontSize: 'small'}}>
+        Showing {resultsArray.length} result(s)
+      </Typography>              
+    </Grid>  
+    );
   }
 
   function DropdownSearch(props){
@@ -105,8 +129,8 @@ function App() {
             />
          </Grid>
          <DropdownSearch className={classes.FormItem} onChange={setCategory}/>
+         <ResultCount/>
          {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
-          <ResultsCount/>
           <PaperGrid/>
           {(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
         </Grid>

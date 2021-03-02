@@ -19,6 +19,26 @@ function App() {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState(startingCategories);
   const [resultsArray, setResultsArray] = useState([]);
+  
+  function DropdownSearch(props){
+    return(
+      <Grid item xs={10} md={6}>
+      <FormControl className={props.className}>
+        <InputLabel>category</InputLabel>
+        <Select
+          value={category}
+          onChange={event => {
+            setCategory(event.target.value);
+          }}
+        >
+          {[...categories].map(item => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Grid>
+    );
+  }
 
   function consumeApi(){
     let url = 'https://api.chucknorris.io/jokes/random';
@@ -48,7 +68,7 @@ function App() {
       setIsLoaded(true);
     })
   }
-  
+
   return (
   );
 }

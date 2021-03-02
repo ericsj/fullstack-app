@@ -20,6 +20,14 @@ function App() {
   const [categories, setCategories] = useState(startingCategories);
   const [resultsArray, setResultsArray] = useState([]);
   
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#25EFA1',
+      },
+    },
+  });
+
   function DropdownSearch(props){
     return(
       <Grid item xs={10} md={6}>
@@ -71,7 +79,7 @@ function App() {
 
   return (
     <div className="App">
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <Grid container
           className={classes.container}
           direction="row"

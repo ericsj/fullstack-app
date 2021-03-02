@@ -3,6 +3,9 @@ import './App.css';
 import 'fontsource-roboto';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
+import ResultsCount from './components/ResultsCount';
+import SearchButton from './components/SearchButton';
+import PaperContainer from './components/PaperContainer';
 import TextField from '@material-ui/core/TextField';
 import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 

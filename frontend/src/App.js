@@ -28,6 +28,27 @@ function App() {
     },
   });
 
+  function PaperGrid() {
+    if (resultsArray.length === 1){
+      return (
+        <div>
+          <PaperContainer paperClass={classes.Paper} text={resultsArray}/>
+        </div>
+      );
+    }
+    else if (resultsArray.length > 1) {
+    return (
+    <div>
+        {resultsArray.map(item => (
+          <PaperContainer paperClass={classes.Paper} text={item}/>
+        ))}
+        {resultsArray.length}
+    </div>
+    );
+    }
+    return("");
+  }
+
   function DropdownSearch(props){
     return(
       <Grid item xs={10} md={6}>
@@ -99,6 +120,7 @@ function App() {
          <DropdownSearch className={classes.FormItem} onChange={setCategory}/>
          {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
           <ResultsCount/>
+          <PaperGrid/>
           {(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
         </Grid>
       </ThemeProvider>

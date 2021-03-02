@@ -18,6 +18,36 @@ function App() {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState(startingCategories);
   const [resultsArray, setResultsArray] = useState([]);
+
+  function consumeApi(){
+    let url = 'https://api.chucknorris.io/jokes/random';
+    if(category){
+      url = `https://api.chucknorris.io/jokes/random?category=${category}`;
+    }
+    if (query){
+      url = `https://api.chucknorris.io/jokes/search?query=${query}`;
+    }
+    fetch(url)
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+      let result = data.result;
+      let value = data.value;
+      let newArray = [];
+      if (result){
+        Object.keys(result).map(key=>{
+          newArray.push(result[key].value);
+        })
+        setResultsArray(newArray);
+      }
+      else if (value){
+        setResultsArray([value]);
+      }
+      setIsLoaded(true);
+    })
+  }
+  
   return (
   );
 }

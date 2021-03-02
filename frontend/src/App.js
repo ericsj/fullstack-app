@@ -70,6 +70,31 @@ function App() {
   }
 
   return (
+    <div className="App">
+      <ThemeProvider>
+        <Grid container
+          className={classes.container}
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={2}>
+          <Grid item xs={10} md={6}>
+            <TextField
+              className={classes.FormItem}
+              onChange={event => {
+                const value = event.target.value;
+                setQuery(value);
+              }}
+              placeholder="Search"
+            />
+         </Grid>
+         <DropdownSearch className={classes.FormItem} onChange={setCategory}/>
+         {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
+          <ResultsCount/>
+          {(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
+        </Grid>
+      </ThemeProvider>
+    </div>
   );
 }
 

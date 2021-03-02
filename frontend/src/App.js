@@ -10,6 +10,14 @@ import TextField from '@material-ui/core/TextField';
 import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 
 function App() {
+  let startingCategories = ["animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
+  const classes = useStyles();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState(startingCategories);
+  const [resultsArray, setResultsArray] = useState([]);
   return (
   );
 }

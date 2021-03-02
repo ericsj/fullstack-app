@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 
 function App() {
-  let startingCategories = ["animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
+  let startingCategories = ["Any","animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
   const classes = useStyles();
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -58,8 +58,7 @@ function App() {
           value={category}
           onChange={event => {
             setCategory(event.target.value);
-          }}
-        >
+          }}>
           {[...categories].map(item => (
             <MenuItem value={item}>{item}</MenuItem>
           ))}
@@ -70,30 +69,18 @@ function App() {
   }
 
   function consumeApi(){
-    let url = 'https://api.chucknorris.io/jokes/random';
-    if(category){
-      url = `https://api.chucknorris.io/jokes/random?category=${category}`;
-    }
-    if (query){
-      url = `https://api.chucknorris.io/jokes/search?query=${query}`;
+    let url = 'http://localhost:8000';
+    if(query){
+      url = `http://localhost:8000?query=${query}`;
+    } else if (category && category !== 'Any'){
+      url = `http://localhost:8000?category=${category}`;
     }
     fetch(url)
     .then((response) => {
         return response.json();
     })
     .then((data) => {
-      let result = data.result;
-      let value = data.value;
-      let newArray = [];
-      if (result){
-        Object.keys(result).map(key=>{
-          newArray.push(result[key].value);
-        })
-        setResultsArray(newArray);
-      }
-      else if (value){
-        setResultsArray([value]);
-      }
+      setResultsArray(data);
       setIsLoaded(true);
     })
   }

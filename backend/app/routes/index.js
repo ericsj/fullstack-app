@@ -6,10 +6,10 @@ exports.routes = function(app) {
     let query = request.query.query;
     let category = request.query.category;
     let url = `https://api.chucknorris.io/jokes/random`;
-    if(category != undefined){
+    if(category !== undefined){
       url = `https://api.chucknorris.io/jokes/random?category=${category}`;
     }
-    else if (query != undefined){
+    else if (query !== undefined){
       url = `https://api.chucknorris.io/jokes/search?query=${query}`;
     }
     let newArray = []

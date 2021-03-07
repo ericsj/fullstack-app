@@ -5,10 +5,10 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SearchButton from './components/SearchButton';
+import DropdownSearch from './components/DropdownSearch';
 import useStyles from './useStyles.js'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 
 function App() {
   let startingCategories = ["Any","animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
@@ -73,24 +73,6 @@ function App() {
     );
   }
 
-  function DropdownSearch(props){
-    return(
-      <Grid item xs={10} md={6}>
-      <FormControl className={props.className}>
-        <InputLabel>category</InputLabel>
-        <Select
-          value={category}
-          onChange={event => {
-            setCategory(event.target.value);
-          }}>
-          {[...categories].map(item => (
-            <MenuItem value={item}>{item}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Grid>
-    );
-  }
 
   function consumeApi(){
     let url = 'http://localhost:8000';
@@ -128,7 +110,11 @@ function App() {
               placeholder="Search"
             />
          </Grid>
-         <DropdownSearch className={classes.FormItem} onChange={setCategory}/>
+         <DropdownSearch
+            setCategory={setCategory}
+            className={classes.FormItem}
+            category={category}
+            categories={categories}/>
          <ResultCount/>
          {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
           <PaperGrid/>

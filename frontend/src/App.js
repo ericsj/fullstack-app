@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SearchButton from './components/SearchButton';
 import DropdownSearch from './components/DropdownSearch';
+import PaperContainer from './components/PaperContainer';
 import useStyles from './useStyles.js'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -26,18 +27,6 @@ function App() {
       },
     },
   });
-
-  function PaperContainer(props){
-    return(
-      <Grid item xs={10} md={12}>
-        <Paper className={props.paperClass}>
-          <Typography>
-            {props.text}
-          </Typography>
-        </Paper>
-      </Grid>
-    );
-  }
 
   function PaperGrid() {
     if (resultsArray.length === 1){

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import SearchButton from './components/SearchButton';
 import DropdownSearch from './components/DropdownSearch';
 import PaperContainer from './components/PaperContainer';
+import PaperGrid from './components/PaperGrid';
 import ResultCount from './components/ResultCount';
 import useStyles from './useStyles.js'
 import Paper from '@material-ui/core/Paper';
@@ -28,31 +29,6 @@ function App() {
       },
     },
   });
-
-  function PaperGrid() {
-    if (resultsArray.length === 1){
-      return (
-        <div>
-          <PaperContainer paperClass={classes.Paper} text={resultsArray}/>
-        </div>
-      );
-    }
-    else if (resultsArray.length > 1) {
-    return (
-    <div>
-        {resultsArray.map(item => (
-          <div>
-          <PaperContainer paperClass={classes.Paper} text={item}/>
-          <br/>
-          </div>
-        ))}
-        {resultsArray.length}
-    </div>
-    );
-    }
-    return("");
-  }
-
 
   function consumeApi(){
     let url = 'http://localhost:8000';
@@ -97,7 +73,7 @@ function App() {
             categories={categories}/>
          <ResultCount resultsArray={resultsArray}/>
          {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
-          <PaperGrid/>
+          <PaperGrid resultsArray={resultsArray} paperClass={classes.Paper}/>
           {(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
         </Grid>
       </ThemeProvider>

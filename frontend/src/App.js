@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import 'fontsource-roboto';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './themes/theme';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SearchButton from './components/SearchButton';
@@ -21,14 +22,6 @@ function App() {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState(startingCategories);
   const [resultsArray, setResultsArray] = useState([]);
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#25EFA1',
-      },
-    },
-  });
 
   function consumeApi(){
     let url = 'http://localhost:8000';

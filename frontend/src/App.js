@@ -13,6 +13,7 @@ import ResultCount from './components/ResultCount';
 import useStyles from './useStyles.js'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import consumeApi from './util/consumeApi'
 
 function App() {
   let startingCategories = ["Any","animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
@@ -22,23 +23,6 @@ function App() {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState(startingCategories);
   const [resultsArray, setResultsArray] = useState([]);
-
-  function consumeApi(){
-    let url = 'http://localhost:8000';
-    if(query){
-      url = `http://localhost:8000?query=${query}`;
-    } else if (category && category !== 'Any'){
-      url = `http://localhost:8000?category=${category}`;
-    }
-    fetch(url)
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-      setResultsArray(data);
-      setIsLoaded(true);
-    })
-  }
 
   return (
     <div className="App">
@@ -65,9 +49,14 @@ function App() {
             category={category}
             categories={categories}/>
          <ResultCount resultsArray={resultsArray}/>
-         {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
+         <SearchButton
+            buttomClass={classes.Button}
+            onClick={() => {
+              consumeApi(query, category, setResultsArray, setIsLoaded)
+            }
+            }
+          />
           <PaperGrid resultsArray={resultsArray} paperClass={classes.Paper}/>
-          {(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
         </Grid>
       </ThemeProvider>
     </div>

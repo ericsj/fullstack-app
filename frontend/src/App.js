@@ -15,7 +15,6 @@ import consumeApi from './util/consumeApi'
 function App() {
   let categories = ["Any","animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
   const classes = useStyles();
-  const [isLoaded, setIsLoaded] = useState(false);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
   const [resultsArray, setResultsArray] = useState([]);
@@ -48,7 +47,7 @@ function App() {
          <SearchButton
             buttomClass={classes.Button}
             onClick={() => {
-              consumeApi(query, category, setResultsArray, setIsLoaded)
+              consumeApi(query, category, setResultsArray)
             }
             }
           />

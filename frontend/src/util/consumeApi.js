@@ -1,4 +1,4 @@
-function consumeApi(query, category, setResultsArray, setIsLoaded){
+function consumeApi(query, category, setResultsArray){
   let url = 'http://localhost:8000';
   if(query){
     url = `http://localhost:8000?query=${query}`;
@@ -11,7 +11,6 @@ function consumeApi(query, category, setResultsArray, setIsLoaded){
   })
   .then((data) => {
     setResultsArray(data);
-    setIsLoaded(true);
   })
 }
 export default consumeApi;

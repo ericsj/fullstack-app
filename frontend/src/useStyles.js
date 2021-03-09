@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   Paper: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
     height: '20vh',
     margin: '3vh',
     width: '40vw',

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import SearchButton from './components/SearchButton';
 import DropdownSearch from './components/DropdownSearch';
 import PaperContainer from './components/PaperContainer';
+import ResultCount from './components/ResultCount';
 import useStyles from './useStyles.js'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -52,16 +53,6 @@ function App() {
     return("");
   }
 
-  function ResultCount(props) {
-    return(
-      <Grid item xs={10} md={10}>
-      <Typography style={{fontSize: 'small'}}>
-        Showing {resultsArray.length} result(s)
-      </Typography>              
-    </Grid>  
-    );
-  }
-
 
   function consumeApi(){
     let url = 'http://localhost:8000';
@@ -104,7 +95,7 @@ function App() {
             className={classes.FormItem}
             category={category}
             categories={categories}/>
-         <ResultCount/>
+         <ResultCount resultsArray={resultsArray}/>
          {!(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}
           <PaperGrid/>
           {(resultsArray.length===1) && <SearchButton buttomClass={classes.Button} onClick={consumeApi}/>}

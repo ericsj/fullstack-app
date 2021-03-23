@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
   Paper: {
     overflow: "hidden",
     textOverflow: "ellipsis",
-    height: "20vh",
+    height: "fit-content",
+    minHeight: "5vh",
     margin: "3vh",
     width: "40vw",
     display: "flex",

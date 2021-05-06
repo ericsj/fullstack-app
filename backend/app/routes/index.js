@@ -1,30 +1,38 @@
-var http = require('request');
+const http = require('request');
+
+const baseUrl = `https://api.chucknorris.io/jokes`;
+
+const getUrl = (query, category) => {
+  if (category) {
+    return `${baseUrl}/random?category=${category}`;
+  }
+
+  if (query) {
+    return `${baseUrl}/search?query=${query}`;
+  }
+
+  return `${baseUrl}/random`
+}
 
 exports.routes = function(app) {
   app.get('/', (request, response) => {
     response.header({"Access-Control-Allow-Origin": "*"})
-    let query = request.query.query;
-    let category = request.query.category;
-    let url = `https://api.chucknorris.io/jokes/random`;
-    if(category !== undefined){
-      url = `https://api.chucknorris.io/jokes/random?category=${category}`;
-    }
-    else if (query !== undefined){
-      url = `https://api.chucknorris.io/jokes/search?query=${query}`;
-    }
-    let newArray = []
+    const query = request.query.query;
+    const category = request.query.category;
+    const url = getUrl(query, category)
+
     http(url, { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
-      let result = body.result;
-      let value = body.value;
+      const result = body.result;
+      const value = body.value;
+
       if (result){
-        Object.keys(result).map(key=>{
-          newArray.push(result[key].value);
-        })
-        response.json(newArray)
+        const array = Object.keys(result).map(key => result[key].value)
+        return response.json(array)
       }
-      else if (value){
-        response.json([value])
+      
+      if (value){
+        return response.json([value])
       }
     })
   })

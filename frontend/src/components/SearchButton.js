@@ -1,18 +1,15 @@
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
-function SearchButton(props) {
+function SearchButton({ onClick }) {
     return(
-      <Grid item xs={10} md={12}>
-        <Button
-          onClick={props.onClick}
-          className={props.buttomClass}
-          color='primary'
-          variant='contained'>
-          Get a new random fact!
-        </Button>
-      </Grid>
+      <Button
+        onClick={onClick}
+        style={{ marginTop: 32, marginBottom: 32 }}
+        color='primary'
+        variant='contained'>
+        Get a new random fact!
+      </Button>
     );
 }
 

@@ -1,16 +1,7 @@
-function consumeApi(query, category, setResultsArray){
-  let url = 'http://localhost:8000';
-  if(query){
-    url = `http://localhost:8000?query=${query}`;
-  } else if (category && category !== 'Any'){
-    url = `http://localhost:8000?category=${category}`;
-  }
-  fetch(url)
-  .then((response) => {
-      return response.json();
-  })
-  .then((data) => {
-    setResultsArray(data);
-  })
+const baseUrl = 'http://localhost:8085'
+
+function consumeApi (query, category) {
+  const url = `${baseUrl}?query=${query || ''}&category=${category || ''}`
+  return fetch(url).then((response) => response.json())
 }
 export default consumeApi;
